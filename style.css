@@ -1,0 +1,56 @@
+
+BODY
+{
+	background: white;
+}
+
+A:link
+{
+	text-decoration: none;
+	color: #777777;
+}
+
+A:visited
+{
+	text-decoration: none;
+	color: #AAAAAA;
+}
+
+A:hover
+{
+	text-decoration: underline;
+	color: #AAAAAA;
+}
+
+H1
+{
+	font-family: Verdana, Arial;
+}
+
+H2
+{
+	font-family: Verdana, Arial;
+	font-weight: normal;
+}
+
+H3
+{
+	font-family: Verdana, Arial;
+	font-weight: normal;
+}
+
+TD
+{
+	font-family: Verdana, Arial;
+	font-size: 13px;
+	color: #000000;
+}
+
+.button
+{
+	font: 11px Verdana, Arial; 
+	background-color: #DDDDDD; 
+	color: #222222;
+	border: 1px solid black;
+	font-weight: normal;
+}
