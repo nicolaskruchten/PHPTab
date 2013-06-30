@@ -34,6 +34,10 @@ PHPTab 2.0 Copyright Nicolas Kruchten 2004
 		<!-- show from/to table and form -->
 		<table>
 		<tr>
+            <td align=right><b>Date:</b></td>
+            <td><input type="date" name="date" value="<?php echo date("Y-m-d") ?>"></td>
+        </tr>
+		<tr>
 			<td align=right valign=top><b>From:</b></td>
 			<td>
 <?php
@@ -41,7 +45,7 @@ $result = mysql_query("select * from " . $dbtableprefix . "debttargets where typ
 while($personrow = mysql_fetch_array($result))
 {
 ?> 
-				<input type=radio name="fromid" value="<?php echo $personrow[targetid] ?>" > <?php echo $personrow[name] ?> <br> 
+				<label><input type=radio name="fromid" value="<?php echo $personrow['targetid'] ?>" > <?php echo $personrow['name'] ?></label> <br> 
 <?php } ?>
 			</td>
 		</tr>
@@ -49,11 +53,11 @@ while($personrow = mysql_fetch_array($result))
 			<td align=right valign=top><b>To:</b></td>
 			<td>
 <?php
-$result = mysql_query("select * from " . $dbtableprefix . "debttargets where active='yes' order by type");
+$result = mysql_query("select * from " . $dbtableprefix . "debttargets where active='yes' order by type desc");
 while($personrow = mysql_fetch_array($result))
 {
 ?> 
-				<input type=radio name="toid" value="<?php echo $personrow[targetid] ?>" > <?php echo $personrow[name] ?> <br> 
+				<label><input type=radio name="toid" value="<?php echo $personrow['targetid'] ?>" > <?php echo $personrow['name'] ?></label> <br> 
 <?php } ?>
 			</td>
 		</tr>
@@ -94,7 +98,7 @@ $plusminus = 0;
 $result1 = mysql_query("select * from " . $dbtableprefix . "debttargets where type='person' and active='yes'");
 while($personrow = mysql_fetch_array($result1))
 {
-	$result2 = mysql_query("select (sum(r.fraction * e.amount)), 1 as rank from " . $dbtableprefix . "debtratios as r, " . $dbtableprefix . "debtentries as e where r.targetid=" . $personrow[targetid] . " and e.toid=r.macroid UNION select sum(e.amount), 2 as rank from " . $dbtableprefix . "debtentries as e where e.fromid=" . $personrow[targetid] . " order by rank");
+	$result2 = mysql_query("select (sum(r.fraction * e.amount)), 1 as rank from " . $dbtableprefix . "debtratios as r, " . $dbtableprefix . "debtentries as e where r.targetid=" . $personrow['targetid'] . " and e.toid=r.macroid UNION select sum(e.amount), 2 as rank from " . $dbtableprefix . "debtentries as e where e.fromid=" . $personrow['targetid'] . " order by rank");
 	
 	$in = mysql_fetch_array($result2);
 	$out = mysql_fetch_array($result2);
@@ -157,17 +161,17 @@ $result=mysql_query($selectquery, $db);
 <?php while ($therow = mysql_fetch_array($result))
 { ?>
 	<tr valign=top>
-		<td><?php echo nicedate($therow[thedate]); ?></td>
-		<td><?php echo $therow[fromname]; ?></td>
-		<td><?php echo $therow[toname]; ?></td>
-		<td align=right>$<?php echo number_format($therow[amount], 2); ?></td>
-		<td><?php echo $therow[comment]; ?></td>	
+		<td><?php echo nicedate($therow['thedate']); ?></td>
+		<td><?php echo $therow['fromname']; ?></td>
+		<td><?php echo $therow['toname']; ?></td>
+		<td align=right>$<?php echo number_format($therow['amount'], 2); ?></td>
+		<td><?php echo $therow['comment']; ?></td>	
 		<?php if(($therow["fromactive"] == "yes") && ($therow["toactive"] == "yes"))
 		{
 		?>
 		<form method="post" action="index.php">
 		<input type="hidden" name="sub" value="1">
-		<input type="hidden" name="debtentryid" value="<?php echo $therow[debtentryid]?>"><td><input type="submit" value="delete" class="button"></td></form>
+		<input type="hidden" name="debtentryid" value="<?php echo $therow['debtentryid']?>"><td><input type="submit" value="delete" class="button"></td></form>
 		<?php } else { ?>
 		
 		<td></td>

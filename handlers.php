@@ -40,7 +40,7 @@ if(isset($_POST['sub']))
 		# couldn't delete
 		$message = "NOT Deleted!";
 	}
-	elseif(($_POST["sub"]==2) && recordEntry($_POST["fromid"], $_POST["toid"], $_POST["comment"], $_POST["amount"]))
+	elseif(($_POST["sub"]==2) && recordEntry($_POST["date"], $_POST["fromid"], $_POST["toid"], $_POST["comment"], $_POST["amount"]))
 	{
 		# recorded
 		$message = "Recorded OK!";

@@ -38,7 +38,7 @@ while($row = mysql_fetch_array($result))
 ?>
 
 <table border="1" cellpadding=5>
-<tr><td colspan="2" align="center"><b><i><?php echo$row[name]?></i></b>
+<tr><td colspan="2" align="center"><b><i><?php echo$row['name']?></i></b>
 
 <?php 
 if($row["active"] == "no")
@@ -49,12 +49,12 @@ if($row["active"] == "no")
 </td><tr>
 
 <?php 
-	$result2 = mysql_query("select * from " . $dbtableprefix . "debtratios as a, " . $dbtableprefix . "debttargets as b where a.macroid=" . $row[targetid] . " and a.targetid=b.targetid");
+	$result2 = mysql_query("select * from " . $dbtableprefix . "debtratios as a, " . $dbtableprefix . "debttargets as b where a.macroid=" . $row['targetid'] . " and a.targetid=b.targetid");
 	while($row2 = mysql_fetch_array($result2))
 	{
 ?>
 
-<tr><td><?php echo $row2[name] ?> </td><td> <?php echo number_format(100*$row2[fraction], 1)?>%</td></tr>
+<tr><td><?php echo $row2['name'] ?> </td><td> <?php echo number_format(100*$row2['fraction'], 1)?>%</td></tr>
 
 <?php } ?>
 

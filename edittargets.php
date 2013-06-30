@@ -74,7 +74,7 @@ $result = mysql_query("select * from " . $dbtableprefix . "debttargets where act
 while($row = mysql_fetch_array($result))
 {
 
-	$result2 = mysql_query("select (sum(r.fraction * e.amount)), 1 as rank from " . $dbtableprefix . "debtratios as r, " . $dbtableprefix . "debtentries as e where r.targetid=" . $row[targetid] . " and e.toid=r.macroid UNION select sum(e.amount), 2 as rank from " . $dbtableprefix . "debtentries as e where e.fromid=" . $row[targetid] . " order by rank");
+	$result2 = mysql_query("select (sum(r.fraction * e.amount)), 1 as rank from " . $dbtableprefix . "debtratios as r, " . $dbtableprefix . "debtentries as e where r.targetid=" . $row['targetid'] . " and e.toid=r.macroid UNION select sum(e.amount), 2 as rank from " . $dbtableprefix . "debtentries as e where e.fromid=" . $row['targetid'] . " order by rank");
 	
 	$in = mysql_fetch_array($result2);
 	$out = mysql_fetch_array($result2);
