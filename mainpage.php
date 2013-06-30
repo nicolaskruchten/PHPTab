@@ -63,11 +63,11 @@ while($personrow = mysql_fetch_array($result))
 		</tr>
 		<tr>
 			<td align=right><b>Comment:</b></td>
-			<td><input type=text name="comment"></td>
+			<td><input type="text" name="comment"></td>
 		</tr>
 		<tr>
 			<td align=right><b>Amount:</b></td>
-			<td><input type=text name="amount"></td>
+			<td><input type="number" name="amount" step="0.01"></td>
 		</tr>
 		<tr>
 			<td align=right>&nbsp;</td>
