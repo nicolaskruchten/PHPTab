@@ -37,15 +37,15 @@ include("handlers.php"); # detect form submission, pass off to right helper, set
 <body>
 
 <?php
-if($_POST["sub"] != 0) # a form was submitted
+if(isset($_POST['sub']) && $_POST["sub"] != 0) # a form was submitted
 {
 	include("showmessage.php");
 } 
-elseif($_POST["mode"] == "edit")
+elseif(isset($_POST['mode']) && $_POST["mode"] == "edit")
 {
 	include("edittargets.php");
 }
-elseif($_POST["mode"] == "macros")
+elseif(isset($_POST['mode']) && $_POST["mode"] == "macros")
 {
 	include("showmacros.php");
 }

@@ -28,73 +28,76 @@ PHPTab 2.0 Copyright Nicolas Kruchten 2004
 # 4 = create a person
 # 5 = create a macro
 
-if(($_POST["sub"] == 1) && deleteEntry($_POST["debtentryid"]))
+if(isset($_POST['sub']))
 {
-	# deleted
-	$message = "Deleted OK!";
-}
-elseif($_POST["sub"]==1)
-{
-	# couldn't delete
-	$message = "NOT Deleted!";
-}
-elseif(($_POST["sub"]==2) && recordEntry($_POST["fromid"], $_POST["toid"], $_POST["comment"], $_POST["amount"]))
-{
-	# recorded
-	$message = "Recorded OK!";
-}
-elseif($_POST["sub"]==2)
-{
-	# couldn't record
-	$message = "NOT Recorded!";
-}
-elseif(($_POST["sub"]==3) && deactivateTarget($_POST["targetid"]))
-{
-	# deactivated
-	$message = "Deactivated OK!";
-}
-elseif($_POST["sub"]==3)
-{
-	# couldn't deactivate
-	$message = "NOT Deactivated!";
-}
-elseif(($_POST["sub"]==4) && addPerson($_POST["name"]))
-{
-	# added
-	$message = "Added OK!";
-}
-elseif($_POST["sub"]==4)
-{
-	# couldn't add
-	$message = "NOT Added!";
-}
-elseif($_POST["sub"]==5)
-{
-
-	$ratioarray = array();
-	$numratios = $_POST["numratios"];
-
-	$ratiosum = 0;
-	for($i=0; $i<$numratios; $i++)
+	if(($_POST["sub"] == 1) && deleteEntry($_POST["debtentryid"]))
 	{
-		$ratioarray[$i] = array($_POST["id" . $i], $_POST["ratio" . $i]);
-		$ratiosum += $_POST["ratio" . $i];
+		# deleted
+		$message = "Deleted OK!";
 	}
-
-	for($i=0; $i<$numratios; $i++)
+	elseif($_POST["sub"]==1)
 	{
-		$ratioarray[$i][1] = $ratioarray[$i][1] / $ratiosum;
+		# couldn't delete
+		$message = "NOT Deleted!";
 	}
-
-	if(addMacro($_POST["name"], $ratioarray))
+	elseif(($_POST["sub"]==2) && recordEntry($_POST["fromid"], $_POST["toid"], $_POST["comment"], $_POST["amount"]))
+	{
+		# recorded
+		$message = "Recorded OK!";
+	}
+	elseif($_POST["sub"]==2)
+	{
+		# couldn't record
+		$message = "NOT Recorded!";
+	}
+	elseif(($_POST["sub"]==3) && deactivateTarget($_POST["targetid"]))
+	{
+		# deactivated
+		$message = "Deactivated OK!";
+	}
+	elseif($_POST["sub"]==3)
+	{
+		# couldn't deactivate
+		$message = "NOT Deactivated!";
+	}
+	elseif(($_POST["sub"]==4) && addPerson($_POST["name"]))
 	{
 		# added
 		$message = "Added OK!";
 	}
-	else
+	elseif($_POST["sub"]==4)
 	{
 		# couldn't add
 		$message = "NOT Added!";
+	}
+	elseif($_POST["sub"]==5)
+	{
+
+		$ratioarray = array();
+		$numratios = $_POST["numratios"];
+
+		$ratiosum = 0;
+		for($i=0; $i<$numratios; $i++)
+		{
+			$ratioarray[$i] = array($_POST["id" . $i], $_POST["ratio" . $i]);
+			$ratiosum += $_POST["ratio" . $i];
+		}
+
+		for($i=0; $i<$numratios; $i++)
+		{
+			$ratioarray[$i][1] = $ratioarray[$i][1] / $ratiosum;
+		}
+
+		if(addMacro($_POST["name"], $ratioarray))
+		{
+			# added
+			$message = "Added OK!";
+		}
+		else
+		{
+			# couldn't add
+			$message = "NOT Added!";
+		}
 	}
 }
 
