@@ -38,7 +38,7 @@ while($row = mysql_fetch_array($result))
 ?>
 
 <table border="1" cellpadding=5>
-<tr><td colspan="2" align="center"><b><i><?=$row[name]?></i></b>
+<tr><td colspan="2" align="center"><b><i><?php echo$row[name]?></i></b>
 
 <?php 
 if($row["active"] == "no")
@@ -54,7 +54,7 @@ if($row["active"] == "no")
 	{
 ?>
 
-<tr><td><?= $row2[name] ?> </td><td> <?= number_format(100*$row2[fraction], 1)?>%</td></tr>
+<tr><td><?php echo $row2[name] ?> </td><td> <?php echo number_format(100*$row2[fraction], 1)?>%</td></tr>
 
 <?php } ?>
 

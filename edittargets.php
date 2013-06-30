@@ -51,13 +51,13 @@ PHPTab 2.0 Copyright Nicolas Kruchten 2004
 		while($row = mysql_fetch_array($result))
 		{
 	?>
-		<tr><td align="right"><?= $row["name"] ?> <input type="hidden" name="id<?= $i ?>" value="<?= $row["targetid"] ?>"></td><td><input type="text" name="ratio<?= $i ?>" size="2"></td></tr>
+		<tr><td align="right"><?php echo $row["name"] ?> <input type="hidden" name="id<?php echo $i ?>" value="<?php echo $row["targetid"] ?>"></td><td><input type="text" name="ratio<?php echo $i ?>" size="2"></td></tr>
 	<?php 
 		$i++;
 		} 
 	?>
 	</table>
-	<input type="hidden" name="numratios" value="<?= $numratios ?>">
+	<input type="hidden" name="numratios" value="<?php echo $numratios ?>">
 	<input type="submit" value="create" class="button">
 </form>
 
@@ -83,7 +83,7 @@ while($row = mysql_fetch_array($result))
 	{
 ?>
 
-<option value="<?= $row["targetid"] ?>"><?= $row["name"] ?></option>
+<option value="<?php echo $row["targetid"] ?>"><?php echo $row["name"] ?></option>
 
 <?php } } ?>
 </select> <input type="submit" value="deactivate" class="button">
@@ -102,7 +102,7 @@ while($row = mysql_fetch_array($result))
 {
 ?>
 
-<option value="<?= $row["targetid"] ?>"><?= $row["name"] ?></option>
+<option value="<?php echo $row["targetid"] ?>"><?php echo $row["name"] ?></option>
 
 <?php } ?>
 </select> <input type="submit" value="deactivate" class="button">

@@ -41,7 +41,7 @@ $result = mysql_query("select * from " . $dbtableprefix . "debttargets where typ
 while($personrow = mysql_fetch_array($result))
 {
 ?> 
-				<input type=radio name="fromid" value="<?= $personrow[targetid] ?>" > <?= $personrow[name] ?> <br> 
+				<input type=radio name="fromid" value="<?php echo $personrow[targetid] ?>" > <?php echo $personrow[name] ?> <br> 
 <?php } ?>
 			</td>
 		</tr>
@@ -53,7 +53,7 @@ $result = mysql_query("select * from " . $dbtableprefix . "debttargets where act
 while($personrow = mysql_fetch_array($result))
 {
 ?> 
-				<input type=radio name="toid" value="<?= $personrow[targetid] ?>" > <?= $personrow[name] ?> <br> 
+				<input type=radio name="toid" value="<?php echo $personrow[targetid] ?>" > <?php echo $personrow[name] ?> <br> 
 <?php } ?>
 			</td>
 		</tr>
@@ -105,13 +105,13 @@ while($personrow = mysql_fetch_array($result1))
 		{$thecolour='black'; $plusminus += ($out[0] - $in[0]);}
 ?>
 			<tr>
-				<td><b><?= $personrow["name"];?></b></td>
-				<td align=right><span style="color:<?= $thecolour; ?>;">$<?= number_format(($out[0] - $in[0]),2);?></span></td>
+				<td><b><?php echo $personrow["name"];?></b></td>
+				<td align=right><span style="color:<?php echo $thecolour; ?>;">$<?php echo number_format(($out[0] - $in[0]),2);?></span></td>
 			</tr>
 <?php } ?>
 			<tr>
 				<td><i><b>+/-</b></i></td>
-				<td align=right><i>$<?= number_format($plusminus,2) ?></i></td>
+				<td align=right><i>$<?php echo number_format($plusminus,2) ?></i></td>
 			</tr>
 		</table>
 		</td>
@@ -160,14 +160,14 @@ $result=mysql_query($selectquery, $db);
 		<td><?php echo nicedate($therow[thedate]); ?></td>
 		<td><?php echo $therow[fromname]; ?></td>
 		<td><?php echo $therow[toname]; ?></td>
-		<td align=right>$<?= number_format($therow[amount], 2); ?></td>
+		<td align=right>$<?php echo number_format($therow[amount], 2); ?></td>
 		<td><?php echo $therow[comment]; ?></td>	
 		<?php if(($therow["fromactive"] == "yes") && ($therow["toactive"] == "yes"))
 		{
 		?>
 		<form method="post" action="index.php">
 		<input type="hidden" name="sub" value="1">
-		<input type="hidden" name="debtentryid" value="<?= $therow[debtentryid]?>"><td><input type="submit" value="delete" class="button"></td></form>
+		<input type="hidden" name="debtentryid" value="<?php echo $therow[debtentryid]?>"><td><input type="submit" value="delete" class="button"></td></form>
 		<?php } else { ?>
 		
 		<td></td>

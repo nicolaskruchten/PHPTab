@@ -22,6 +22,6 @@ PHPTab 2.0 Copyright Nicolas Kruchten 2004
 */
 ?>
 <div align="center">
-	<p>&nbsp;</p><p>&nbsp;</p><h1><?= $message ?></h1>
+	<p>&nbsp;</p><p>&nbsp;</p><h1><?php echo $message ?></h1>
 	<form method="get" action="index.php"><input type="submit" value="continue" class="button"></form>
 	</div>
