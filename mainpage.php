@@ -122,22 +122,6 @@ while($personrow = mysql_fetch_array($result1))
 	</tr>
 </table>
 
-<table align="center">
-	<tr>
-		<td>
-			<form method="post" action="index.php">
-				<input type="hidden" name="mode" value="edit">
-				<input type="submit" value="edit targets" class="button">
-			</form>
-		</td>
-		<td>
-			<form method="post" action="index.php">
-				<input type="hidden" name="mode" value="macros">
-				<input type="submit" value="view macros" class="button">
-			</form>
-		</td>
-	</tr>
-</table>
 		<!-- show transaction list -->
 <br>
 <?php

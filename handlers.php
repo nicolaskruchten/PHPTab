@@ -34,41 +34,57 @@ if(isset($_POST['sub']))
 	{
 		# deleted
 		$message = "Deleted OK!";
+		$message_type = "success";
+		$destination = "mainpage";
 	}
 	elseif($_POST["sub"]==1)
 	{
 		# couldn't delete
 		$message = "NOT Deleted!";
+		$message_type = "error";
+		$destination = "mainpage";
 	}
 	elseif(($_POST["sub"]==2) && recordEntry($_POST["date"], $_POST["fromid"], $_POST["toid"], $_POST["comment"], $_POST["amount"]))
 	{
 		# recorded
 		$message = "Recorded OK!";
+		$message_type = "success";
+		$destination = "mainpage";
 	}
 	elseif($_POST["sub"]==2)
 	{
 		# couldn't record
 		$message = "NOT Recorded!";
+		$message_type = "error";
+		$destination = "mainpage";
 	}
 	elseif(($_POST["sub"]==3) && deactivateTarget($_POST["targetid"]))
 	{
 		# deactivated
 		$message = "Deactivated OK!";
+		$message_type = "success";
+		$destination = "edit";
 	}
 	elseif($_POST["sub"]==3)
 	{
 		# couldn't deactivate
 		$message = "NOT Deactivated!";
+		$message_type = "error";
+		$destination = "edit";
 	}
 	elseif(($_POST["sub"]==4) && addPerson($_POST["name"]))
 	{
 		# added
 		$message = "Added OK!";
+		$message_type = "success";
+		$destination = "edit";
 	}
 	elseif($_POST["sub"]==4)
 	{
 		# couldn't add
 		$message = "NOT Added!";
+		$message_type = "error";
+		$destination = "edit";
 	}
 	elseif($_POST["sub"]==5)
 	{
@@ -92,13 +108,22 @@ if(isset($_POST['sub']))
 		{
 			# added
 			$message = "Added OK!";
+			$message_type = "success";
+			$destination = "edit";
 		}
 		else
 		{
 			# couldn't add
 			$message = "NOT Added!";
+			$message_type = "error";
+			$destination = "edit";
 		}
 	}
+
+	$_SESSION["message"] = $message;
+	$_SESSION["message_type"] = $message_type;
+	header("Location: index.php?mode=" . $destination);
+	exit(0);
 }
 
 ?>

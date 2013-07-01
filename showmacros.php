@@ -22,9 +22,7 @@ PHPTab 2.0 Copyright Nicolas Kruchten 2004
 */
 ?>
 <div align="center">
-<form method="post" action="index.php">
-<input type="submit" value="main page" class="button">
-</form>
+
 
 <h3>Existing Macros</h3>
 
