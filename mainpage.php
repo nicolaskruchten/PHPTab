@@ -67,6 +67,12 @@ while($personrow = mysql_fetch_array($result))
 		    </div>
 		</div>
 		<div class="control-group">
+		    <label class="control-label" for="category">Category</label>
+		    <div class="controls">
+		      <input class="input-medium" type="text" id="category" name="category">
+		    </div>
+		</div>
+		<div class="control-group">
 		    <label class="control-label" for="comment">Comment</label>
 		    <div class="controls">
 		      <input class="input-medium" type="text" id="comment" name="comment">
@@ -154,12 +160,13 @@ $result=mysql_query($selectquery, $db);
 <table class="table table-striped table-bordered">
 
 	<tr>
-		<th width=100>date</th>
-		<th width=75>from</th>
-		<th width=75>to</th>
-		<th width=75>amount</th>
-		<th width=300>comment</th>
-		<th width=20>delete</th>
+		<th width=100>Date</th>
+		<th width=75>From</th>
+		<th width=75>To</th>
+		<th width=75>Amount</th>
+		<th width=100>Category</th>
+		<th width=200>Comment</th>
+		<th width=20>Delete</th>
 	</tr>
 
 <?php while ($therow = mysql_fetch_array($result))
@@ -169,6 +176,7 @@ $result=mysql_query($selectquery, $db);
 		<td><?php echo $therow['fromname']; ?></td>
 		<td><?php echo $therow['toname']; ?></td>
 		<td align=right>$<?php echo number_format($therow['amount'], 2); ?></td>
+		<td><?php echo $therow['category']; ?></td>	
 		<td><?php echo $therow['comment']; ?></td>	
 		<?php if(($therow["fromactive"] == "yes") && ($therow["toactive"] == "yes"))
 		{

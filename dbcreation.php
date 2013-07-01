@@ -21,7 +21,7 @@ PHPTab 2.0 Copyright Nicolas Kruchten 2004
 
 */
 
-$query = "CREATE TABLE IF NOT EXISTS `" . $dbtableprefix . "debtentries` (  `debtentryid` int(11) NOT NULL auto_increment,  `thedate` datetime default NULL,  `fromid` int(11) default NULL,  `toid` int(11) default NULL,  `comment` tinytext NOT NULL,  `amount` double NOT NULL default '0',  PRIMARY KEY  (`debtentryid`))";
+$query = "CREATE TABLE IF NOT EXISTS `" . $dbtableprefix . "debtentries` (  `debtentryid` int(11) NOT NULL auto_increment,  `thedate` datetime default NULL,  `fromid` int(11) default NULL,  `toid` int(11) default NULL,  `category` tinytext NOT NULL,  `comment` tinytext NOT NULL,  `amount` double NOT NULL default '0',  PRIMARY KEY  (`debtentryid`))";
 
 mysql_query($query);
 

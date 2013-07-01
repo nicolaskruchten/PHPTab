@@ -44,7 +44,7 @@ if(isset($_POST['sub']))
 		$message_type = "error";
 		$destination = "mainpage";
 	}
-	elseif(($_POST["sub"]==2) && recordEntry($_POST["date"], $_POST["fromid"], $_POST["toid"], $_POST["comment"], $_POST["amount"]))
+	elseif(($_POST["sub"]==2) && recordEntry($_POST["date"], $_POST["fromid"], $_POST["toid"], $_POST["category"], $_POST["comment"], $_POST["amount"]))
 	{
 		# recorded
 		$message = "Recorded OK!";

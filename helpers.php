@@ -40,10 +40,10 @@ function deleteEntry($debtentryid)
 	return mysql_query("delete from " . $dbtableprefix . "debtentries where debtentryid=$debtentryid");
 }
 
-function recordEntry($thedate, $fromid, $toid, $comment, $amount)
+function recordEntry($thedate, $fromid, $toid, $category, $comment, $amount)
 {
 	global $dbtableprefix;
-	return mysql_query("insert into " . $dbtableprefix . "debtentries (debtentryid, thedate, fromid, toid, comment, amount) values (null, '" . $thedate . "', $fromid, $toid, '$comment', $amount)");
+	return mysql_query("insert into " . $dbtableprefix . "debtentries (debtentryid, thedate, fromid, toid, category, comment, amount) values (null, '" . $thedate . "', $fromid, $toid, '$category', '$comment', $amount)");
 }
 
 function deactivateTarget($targetid)
