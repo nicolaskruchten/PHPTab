@@ -31,7 +31,7 @@ PHPTab 2.0 Copyright Nicolas Kruchten 2004
 		<div class="control-group">
 		    <label class="control-label" for="date">Date</label>
 		    <div class="controls">
-		      <input class="input-medium" type="date" id="date" name="date" value="<?php echo date("Y-m-d") ?>">
+		      <input class="input-medium" type="date" id="date" name="date" value="<?php echo date("Y-m-d") ?>" >
 		    </div>
 		</div>
 
@@ -66,10 +66,18 @@ while($personrow = mysql_fetch_array($result))
 <?php } ?>
 		    </div>
 		</div>
+<?php
+$result = mysql_query("select distinct category from " . $dbtableprefix . "debtentries");
+$cats = array();
+while($c = mysql_fetch_array($result))
+{ $cats[] = '"'.$c["category"].'"'; }
+?> 
 		<div class="control-group">
 		    <label class="control-label" for="category">Category</label>
 		    <div class="controls">
-		      <input class="input-medium" type="text" id="category" name="category">
+		      <input class="input-medium" type="text" id="category" name="category"
+		      data-provide="typeahead" data-items="4" autocomplete="off" 
+		      data-source='[<?php echo join($cats, ",")?>]' >
 		    </div>
 		</div>
 		<div class="control-group">
@@ -81,7 +89,7 @@ while($personrow = mysql_fetch_array($result))
 		<div class="control-group">
 		    <label class="control-label" for="amount">Amount</label>
 		    <div class="controls">
-		     	<input class="input-medium" type="number" name="amount" id="amount" step="0.01">
+		     	<input class="input-medium" type="number" name="amount" id="amount" step="0.01" autocomplete="off" >
 		    </div>
 		</div>  
 		<div class="control-group">
