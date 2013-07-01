@@ -140,7 +140,7 @@ while($personrow = mysql_fetch_array($result1))
 </div>
 
 
-<div class="row">
+<div class="row hidden-phone">
   <div class="span10 offset1">
 <?php
 
