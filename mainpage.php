@@ -21,78 +21,88 @@ PHPTab 2.0 Copyright Nicolas Kruchten 2004
 
 */
 ?>
-
-<table width=80% align=center>
-	<tr>
-		<td valign=top align="center" width="50%">
-		<table>
-		<tr>
-		<td valign=middle align=left>
-		<form method="post" action="index.php">
+<div class="row">
+  <div class="span4 offset2">
+<h4>New Transaction</h4>
+		<form method="post" action="index.php" class="form-horizontal">
 		<input type="hidden" name="sub" value=2>
 
 		<!-- show from/to table and form -->
-		<table>
-		<tr>
-            <td align=right><b>Date:</b></td>
-            <td><input type="date" name="date" value="<?php echo date("Y-m-d") ?>"></td>
-        </tr>
-		<tr>
-			<td align=right valign=top><b>From:</b></td>
-			<td>
-<?php
+		<div class="control-group">
+		    <label class="control-label" for="date">Date</label>
+		    <div class="controls">
+		      <input class="input-medium" type="date" id="date" name="date" value="<?php echo date("Y-m-d") ?>">
+		    </div>
+		</div>
+
+		<div class="control-group">
+		    <label class="control-label">From</label>
+		    <div class="controls">
+		    	<?php
 $result = mysql_query("select * from " . $dbtableprefix . "debttargets where type='person' and active='yes'");
 while($personrow = mysql_fetch_array($result))
 {
 ?> 
-				<label><input type=radio name="fromid" value="<?php echo $personrow['targetid'] ?>" > <?php echo $personrow['name'] ?></label> <br> 
+				<label class="radio inline">
+					<input type=radio name="fromid" value="<?php echo $personrow['targetid'] ?>" > 
+					<?php echo $personrow['name'] ?>
+				</label>
 <?php } ?>
-			</td>
-		</tr>
-		<tr>
-			<td align=right valign=top><b>To:</b></td>
-			<td>
-<?php
+		    </div>
+		</div>
+
+		<div class="control-group">
+		    <label class="control-label">To</label>
+		    <div class="controls">
+		<?php
 $result = mysql_query("select * from " . $dbtableprefix . "debttargets where active='yes' order by type desc");
 while($personrow = mysql_fetch_array($result))
 {
 ?> 
-				<label><input type=radio name="toid" value="<?php echo $personrow['targetid'] ?>" > <?php echo $personrow['name'] ?></label> <br> 
+				<label class="radio inline">
+					<input type=radio name="toid" value="<?php echo $personrow['targetid'] ?>" >
+					<?php echo $personrow['name'] ?>
+				</label>
 <?php } ?>
-			</td>
-		</tr>
-		<tr>
-			<td align=right><b>Comment:</b></td>
-			<td><input type="text" name="comment"></td>
-		</tr>
-		<tr>
-			<td align=right><b>Amount:</b></td>
-			<td><input type="number" name="amount" step="0.01"></td>
-		</tr>
-		<tr>
-			<td align=right>&nbsp;</td>
-			<td><input type="submit" value="store entry" class="button"></td>
-		</tr>
-		</table>
+		    </div>
+		</div>
+		<div class="control-group">
+		    <label class="control-label" for="comment">Comment</label>
+		    <div class="controls">
+		      <input class="input-medium" type="text" id="comment" name="comment">
+		    </div>
+		</div>
+		<div class="control-group">
+		    <label class="control-label" for="amount">Amount</label>
+		    <div class="controls">
+		     	<input class="input-medium" type="number" name="amount" id="amount" step="0.01">
+		    </div>
+		</div>  
+		<div class="control-group">
+		    <div class="controls">
+		      <button type="submit" class="btn">save</button>
+		    </div>
+		</div>
+
 		</form>
-		</td>
-		</tr>
-		</table>
 
 
-		</td>
-		<td valign=middle align="center">
+
+
+	</div>
+  	<div class="span2 offset1">
+
+<h4>Standings</h4>
 
 		<!-- show owings table -->
-		<table border=1 cellpadding=8>
+		<table class="table table-striped table-bordered" style="width: 200px; margin: 0 auto;">
+			<thead>
 			<tr>
-				<td colspan=2 align=center><b><i>debt</i></b></td>
+				<th>name</th>
+				<th>owed to</th>
 			</tr>
-			<tr>
-				<td align=center>name</td>
-				<td align=center>owed to</td>
-			</tr>
-			
+		</thead>
+		<tbody>	
 <?php 
 $plusminus = 0;
 $result1 = mysql_query("select * from " . $dbtableprefix . "debttargets where type='person' and active='yes'");
@@ -109,37 +119,47 @@ while($personrow = mysql_fetch_array($result1))
 		{$thecolour='black'; $plusminus += ($out[0] - $in[0]);}
 ?>
 			<tr>
-				<td><b><?php echo $personrow["name"];?></b></td>
+				<td><?php echo $personrow["name"];?></td>
 				<td align=right><span style="color:<?php echo $thecolour; ?>;">$<?php echo number_format(($out[0] - $in[0]),2);?></span></td>
 			</tr>
 <?php } ?>
+		</tbody>
+
+		<tfoot>
 			<tr>
-				<td><i><b>+/-</b></i></td>
-				<td align=right><i>$<?php echo number_format($plusminus,2) ?></i></td>
+				<th>+/-</th>
+				<th align=right>$<?php echo number_format($plusminus,2) ?></th>
 			</tr>
+		</tfoot>
 		</table>
 		</td>
 	</tr>
 </table>
 
-		<!-- show transaction list -->
-<br>
+</div>
+</div>
+
+
+<div class="row">
+  <div class="span10 offset1">
 <?php
 
 $selectquery = "select e.*, a.name as fromname, b.name as toname, a.active as fromactive, b.active as toactive from " . $dbtableprefix . "debtentries as e, " . $dbtableprefix . "debttargets as a, " . $dbtableprefix . "debttargets as b where e.fromid=a.targetid and e.toid=b.targetid order by thedate desc";
 $result=mysql_query($selectquery, $db); 
 
 ?>
-<table cellpadding=5 border=1 align=center>
-<tr><td colspan=6><i><?php echo mysql_num_rows($result); ?> transactions</i></td></tr>
+
+<h4>Transactions</h4>
+
+<table class="table table-striped table-bordered">
 
 	<tr>
-		<td width=100><b><i>date</i></b></td>
-		<td width=75><b><i>from</i></b></td>
-		<td width=75><b><i>to</i></b></td>
-		<td width=75><b><i>amount</i></b></td>
-		<td width=300><b><i>comment</i></b></td>
-		<td><b><i>delete</i></b></td>
+		<th width=100>date</th>
+		<th width=75>from</th>
+		<th width=75>to</th>
+		<th width=75>amount</th>
+		<th width=300>comment</th>
+		<th width=20>delete</th>
 	</tr>
 
 <?php while ($therow = mysql_fetch_array($result))
@@ -155,7 +175,7 @@ $result=mysql_query($selectquery, $db);
 		?>
 		<form method="post" action="index.php">
 		<input type="hidden" name="sub" value="1">
-		<input type="hidden" name="debtentryid" value="<?php echo $therow['debtentryid']?>"><td><input type="submit" value="delete" class="button"></td></form>
+		<input type="hidden" name="debtentryid" value="<?php echo $therow['debtentryid']?>"><td><input type="submit" value="delete" class="btn"></td></form>
 		<?php } else { ?>
 		
 		<td></td>
@@ -165,4 +185,5 @@ $result=mysql_query($selectquery, $db);
 <?php } ?>
 
 </table>
-<br />
+</div>
+</div>
