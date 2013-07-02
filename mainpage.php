@@ -22,8 +22,8 @@ PHPTab 2.0 Copyright Nicolas Kruchten 2004
 */
 ?>
 <div class="row">
-  <div class="span4 offset2">
-<h4>New Transaction</h4>
+  <div class="span3 offset2">
+<h4>&nbsp;</h4>
 		<form method="post" action="index.php" class="form-horizontal">
 		<input type="hidden" name="sub" value=2>
 
@@ -38,32 +38,34 @@ PHPTab 2.0 Copyright Nicolas Kruchten 2004
 		<div class="control-group">
 		    <label class="control-label">From</label>
 		    <div class="controls">
+				<select name="fromid" id="fromid" class="input-medium">
 		    	<?php
 $result = mysql_query("select * from " . $dbtableprefix . "debttargets where type='person' and active='yes'");
 while($personrow = mysql_fetch_array($result))
 {
 ?> 
-				<label class="radio inline">
-					<input type=radio name="fromid" value="<?php echo $personrow['targetid'] ?>" > 
+				<option value="<?php echo $personrow['targetid'] ?>" > 
 					<?php echo $personrow['name'] ?>
-				</label>
+				</option>
 <?php } ?>
+				</select>
 		    </div>
 		</div>
 
 		<div class="control-group">
 		    <label class="control-label">To</label>
 		    <div class="controls">
+				<select name="toid" id="toid" class="input-medium">
 		<?php
 $result = mysql_query("select * from " . $dbtableprefix . "debttargets where active='yes' order by type desc");
 while($personrow = mysql_fetch_array($result))
 {
 ?> 
-				<label class="radio inline">
-					<input type=radio name="toid" value="<?php echo $personrow['targetid'] ?>" >
+				<option value="<?php echo $personrow['targetid'] ?>" >
 					<?php echo $personrow['name'] ?>
-				</label>
+				</option>
 <?php } ?>
+				</select>
 		    </div>
 		</div>
 <?php
@@ -104,7 +106,7 @@ while($c = mysql_fetch_array($result))
 
 
 	</div>
-  	<div class="span2 offset1">
+  	<div class="span2 offset2">
 
 <h4>Standings</h4>
 
@@ -149,6 +151,7 @@ while($personrow = mysql_fetch_array($result1))
 		</td>
 	</tr>
 </table>
+<br />
 
 </div>
 </div>
@@ -163,7 +166,7 @@ $result=mysql_query($selectquery, $db);
 
 ?>
 
-<h4>Transactions</h4>
+<h4><?php echo mysql_num_rows($result) ?> Transactions</h4>
 
 <table class="table table-striped table-bordered">
 
